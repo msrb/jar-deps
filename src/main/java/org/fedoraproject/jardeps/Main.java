@@ -31,7 +31,7 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.jenkinsci.constant_pool_scanner.ConstantPoolScanner;
+import org.fedoraproject.jardeps.spi.DependencyReader;
 
 public class Main {
 
@@ -44,6 +44,7 @@ public class Main {
         JarFile jarFile = new JarFile(args[0]);
 
         Map<String, Set<String>> result = new HashMap<String, Set<String>>();
+        DependencyReader depReader = DependencyReaders.newInstance();
 
         try {
             for (Enumeration<? extends JarEntry> e = jarFile.entries(); e.hasMoreElements();) {
@@ -63,7 +64,7 @@ public class Main {
                     have += in.read(bytes, have, size - have);
                 }
 
-                Set<String> deps = ConstantPoolScanner.dependencies(bytes);
+                Set<String> deps = depReader.getDependencies(bytes);
                 result.put(entry.getName(), deps);
             }
         } finally {
