@@ -24,6 +24,15 @@ package org.fedoraproject.jardeps.spi;
 import java.io.IOException;
 import java.util.Set;
 
+/**
+ * Reads class dependencies from bytecode
+ *
+ * @param data
+ *            bytecode of a class
+ * @throws IOException
+ *             if bytecode is invalid or other error occurred during processing
+ * @return list of classes on which given class depends
+ */
 public interface DependencyReader {
     public Set<String> getDependencies(byte[] data) throws IOException;
 }
