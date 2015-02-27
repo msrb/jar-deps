@@ -47,7 +47,7 @@ public class DependencyReaders {
         }
 
         if (depReader == null) {
-            if (className != DEFAULT_PROVIDER_CLASS.getName()) {
+            if (DEFAULT_PROVIDER_CLASS.getName().equals(className)) {
                 // try default provider
                 try {
                     depReader = DEFAULT_PROVIDER_CLASS.newInstance();
